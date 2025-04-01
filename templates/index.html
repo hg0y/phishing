@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>🎁 هدية لك</title>
+    <script src="/static/js/tracker.js" defer></script>
+    <style>
+        body {
+            font-family: Arial;
+            direction: rtl;
+            padding: 2rem;
+            transition: background 0.5s;
+        }
+
+        #alert {
+            display: none;
+            padding: 1rem;
+            background-color: red;
+            color: white;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 10px;
+        }
+
+        /* شاشة الهدية */
+        #giftScreen {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-family: Arial;
+            text-align: center;
+        }
+
+        #giftScreen button {
+            margin-top: 1rem;
+            padding: 0.7rem 2rem;
+            font-size: 1rem;
+            background: #111;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>أنت تحت المراقبة </h1>
+    <p>يتم الآن سحب معلومات جهازك...</p>
+
+    <div id="info" style="background:#eee; padding:1rem; border-radius:10px;">
+        <p><strong>IP:</strong> <span id="ip">...</span></p>
+        <p><strong>الموقع:</strong> <span id="location">...</span></p>
+        <p><strong>النظام:</strong> <span id="platform">...</span></p>
+        <p><strong>المتصفح:</strong> <span id="browser">...</span></p>
+        <p><strong>نوع الجهاز:</strong> <span id="device">...</span></p>
+        <p><strong>دقة الشاشة:</strong> <span id="res">...</span></p>
+        <p><strong>اللغة:</strong> <span id="lang">...</span></p>
+        <p><strong>الوقت:</strong> <span id="time">...</span></p>
+        <p><strong>التاريخ المحلي:</strong> <span id="localTime">...</span></p>
+        <p><strong>عدد أنوية المعالج:</strong> <span id="cpuCores">...</span></p>
+        <p><strong>نوع الاتصال:</strong> <span id="connection">...</span></p>
+        <p><strong>هل يدعم اللمس؟</strong> <span id="touchSupport">...</span></p>
+        <p><strong>نسبة التكبير:</strong> <span id="pixelRatio">...</span></p>
+    </div>
+
+    <div id="alert">تم التعرف على جهازك... جاري التتبع!</div>
+
+    <audio id="sfx" src="/static/sfx/scream.mp3" preload="auto"></audio>
+
+    <!-- شاشة الهدية -->
+    <div id="giftScreen">
+        <h2 style="font-size: 2rem;">🎁 لديك هدية خاصة!</h2>
+        <p>اضغط على الزر لتأكيد استلامها</p>
+        <button id="giftBtn">استلام الهدية</button>
+    </div>
+</body>
+</html>
