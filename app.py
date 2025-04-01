@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import json
 import os
+import requests
 
 app = Flask(__name__)
 
@@ -12,12 +13,25 @@ def index():
 def log_visitor():
     data = request.get_json()
 
-    # تأكد من وجود ملف
+    # جلب IP ومعلومات الموقع من السيرفر بدل الجافاسكربت
+    try:
+        ip_data = requests.get('https://ipapi.co/json/').json()
+        data['public_ip'] = ip_data.get('ip', 'غير معروف')
+        data['city'] = ip_data.get('city', 'غير معروف')
+        data['region'] = ip_data.get('region', 'غير معروف')
+        data['country'] = ip_data.get('country_name', 'غير معروف')
+    except:
+        data['public_ip'] = 'غير متوفر'
+        data['city'] = 'غير متوفر'
+        data['region'] = 'غير متوفر'
+        data['country'] = 'غير متوفر'
+
+    # إنشاء ملف إذا ما كان موجود
     if not os.path.exists('visitors_log.json'):
         with open('visitors_log.json', 'w') as f:
             f.write("")
 
-    # نسجّل كل زيارة في سطر منفصل
+    # تسجيل الزيارة
     with open('visitors_log.json', 'a', encoding='utf-8') as f:
         f.write(json.dumps(data, ensure_ascii=False) + '\n')
 
